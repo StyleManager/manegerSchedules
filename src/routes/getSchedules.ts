@@ -1,9 +1,32 @@
 import { prisma } from "../lib/prisma";
 import { FastifyTypedInstance } from "../types/fastifyTyped";
+import z from "zod";
 
     export function GetSchedules(server: FastifyTypedInstance){
 
-        server.get("/horarios", async (request, reply) => {
+        server.get("/horarios", {
+            schema: {
+                description: "Horarios de atendimento",
+                response: {
+                    200: z.array(
+                        z.object({
+                            id: z.string(),
+                            day: z.string(),
+                            horarios: z.array(
+                                z.object({
+                                    id: z.string(),
+                                    horario: z.string(),
+                                    livre: z.boolean()
+                                })
+                            )
+                        })
+                    ),
+                    500: z.object({
+                        error: z.string()
+                    })
+                }
+            }
+        },async (request, reply) => {
             try {
 
                 const dias = await prisma.dias.findMany({
