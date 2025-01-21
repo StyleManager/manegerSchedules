@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Clientes {
+  id    String @id @default(uuid())
+  name  String
+  email String @unique
+
+  Agendamentos Agendamentos[]
+}
+
+model Agendamentos {
+  id            String @id @default(uuid())
+  clientId      String 
+  client        Clientes @relation(fields: [clientId], references: [id])
+  dayId         String
+  day           Dias     @relation(fields: [dayId], references: [id])
+  horarioId     String
+  horario       Horarios @relation(fields: [horarioId], references: [id])
+  confirmado    Boolean @default(false)
+}
+
+model Dias {
+  id      String @id @default(uuid())
+  day     DateTime @unique
+
+  Agendamentos Agendamentos[]
+  Horarios Horarios[]
+}
+
+model Horarios {
+  id        String @id @default(uuid())
+  dayId     String
+  day       Dias   @relation(fields: [dayId], references: [id])
+  livre   Boolean @default(true)
+  horario   String
+
+  Agendamentos Agendamentos[]
+}

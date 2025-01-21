@@ -1,0 +1,28 @@
+{
+  "name": "schedulemaneger",
+  "version": "1.0.0",
+  "description": "Requisitos:\r   1- Criar um sistema básico onde os clientes possam visualizar os horários disponíveis e marcar agendamentos.\r   - agendamentos para o dia, só podem acontecer com horarios 6h de antecedencia.\r   - banco de dados (Marcar agendamentos até 1 semena à frente) \r   - Após fazer o agendamento o cliente recebera por email, uma validação para confirmar (Só depois o agendamento é salvo no banco)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^10.0.2",
+    "@fastify/swagger": "^9.4.1",
+    "@fastify/swagger-ui": "^5.2.1",
+    "@prisma/client": "^6.2.1",
+    "dayjs": "^1.11.13",
+    "fastify": "^5.2.1",
+    "fastify-type-provider-zod": "^4.0.2",
+    "prisma": "^6.2.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
