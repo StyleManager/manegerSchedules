@@ -2,7 +2,7 @@
   Requisitos:
   1- Criar um sistema básico onde os clientes possam visualizar os horários disponíveis e marcar agendamentos.
   - agendamentos para o dia, só podem acontecer com horarios 6h de antecedencia.
-  - banco de dados (Marcar agendamentos até 1 semena à frente) 
+  - banco de dados (Marcar agendamentos até 1 semena à frente) (ok)
   - Após fazer o agendamento o cliente recebera por email, uma validação para confirmar (Só depois o agendamento é salvo no banco)
 
   2- Os prestadores de serviço devem receber notificações automáticas sobre novos agendamentos.

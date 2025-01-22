@@ -1,9 +1,8 @@
-import { prisma } from "../lib/prisma";
-import { FastifyTypedInstance } from "../types/fastifyTyped";
-import z from "zod";
+    import { prisma } from "../lib/prisma";
+    import { FastifyTypedInstance } from "../types/fastifyTyped";
+    import z from "zod";
 
     export function GetSchedules(server: FastifyTypedInstance){
-
         server.get("/horarios", {
             schema: {
                 description: "Horarios de atendimento",
@@ -26,9 +25,8 @@ import z from "zod";
                     })
                 }
             }
-        },async (request, reply) => {
+        }, async (request, reply) => {
             try {
-
                 const dias = await prisma.dias.findMany({
                     include:{
                         Horarios: true,
@@ -37,7 +35,6 @@ import z from "zod";
                         day: "asc",
                     },
                 });
-
                 const agenda = dias.map((dias) => ({
                     id: dias.id,
                     day: dias.day.toISOString(),
@@ -47,12 +44,10 @@ import z from "zod";
                         livre: horario.livre
                     }))
                 }))
-
                 return reply.status(200).send(agenda);
             } 
             catch (error) {
                 return reply.status(500).send({error: "Ocorreu um erro ao buscar os dias!"});
             }
         })
-        
     }

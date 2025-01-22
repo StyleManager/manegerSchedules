@@ -5,22 +5,21 @@
     import { validatorCompiler, serializerCompiler, jsonSchemaTransform, ZodTypeProvider } from "fastify-type-provider-zod";
     import { PostDays } from "./functions/postDays";
     import { GetSchedules } from "./routes/getSchedules";
+    import {PostUser } from "./routes/postScheduling";
+    import { GetUser } from "./routes/getUser";
 
-    // iniciar servidor
     const server = fastify().withTypeProvider<ZodTypeProvider>();
 
-    //integrar fastify com zod
     server.setSerializerCompiler(serializerCompiler);
     server.setValidatorCompiler(validatorCompiler);
 
-    //liberar API para o front
     server.register(fastifyCors,{origin:"*"})
     server.register(fastifySwagger, {
         openapi: {
             info: {
                 title: "scheduleMenager",
                 version: "1.0.0",
-            }
+            },
         }, 
         transform: jsonSchemaTransform,
     })
@@ -35,13 +34,9 @@
     })
 
     server.register(GetSchedules)
+    server.register(PostUser);
+    server.register(GetUser);
 
     server.listen({port: 3333}).then(() => {
         console.log("Server running!")
     })
-
-  
-
-
-
-    
