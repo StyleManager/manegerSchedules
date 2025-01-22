@@ -5,8 +5,9 @@
     import { validatorCompiler, serializerCompiler, jsonSchemaTransform, ZodTypeProvider } from "fastify-type-provider-zod";
     import { PostDays } from "./functions/postDays";
     import { GetSchedules } from "./routes/getSchedules";
-    import {PostUser } from "./routes/postScheduling";
-    import { GetUser } from "./routes/getUser";
+    import {PostUser } from "./routes/Create-user";
+    import { GetUser } from "./routes/Login-user";
+    import { PostSchedules } from "./routes/postSchedules";
 
     const server = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -33,9 +34,10 @@
         console.timeEnd("Carregando calendario");
     })
 
-    server.register(GetSchedules)
+    server.register(GetSchedules);
     server.register(PostUser);
     server.register(GetUser);
+    server.register(PostSchedules);
 
     server.listen({port: 3333}).then(() => {
         console.log("Server running!")

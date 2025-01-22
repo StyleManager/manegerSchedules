@@ -19,3 +19,14 @@ Content-Type: application/json
 ###
 GET http://localhost:3333/horarios
 
+###
+POST http://localhost:3333/agendamento
+Content-Type: application/json
+
+{
+    "destinary_name": "Joao",
+    "destinary_email": "vx722100@gmail.com",
+    "dayId": "570dc347-0a9f-46f3-9f50-b57de6f0ff02",
+    "horarioId": "cf5abcbd-31f7-43fa-8c5d-30e1ac538b6a"
+}
+
