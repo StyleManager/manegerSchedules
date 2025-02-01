@@ -16,5 +16,5 @@
 # Biblioteca para datas
 npm i dayjs
 
-# Biblioteca para encio de emails
+# Biblioteca para envio de emails
 npm i nodemailer
