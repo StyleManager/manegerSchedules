@@ -2,9 +2,9 @@ POST http://localhost:3333/cadastrar
 Content-Type: application/json
 
 {
-    "name": "Duda",
-    "email": "Duda@gamil.com",
-    "senha": "Duda123"
+    "name": "admin",
+    "email": "admin@gamil.com",
+    "senha": "admin123"
 }
 
 ###
@@ -12,21 +12,26 @@ POST http://localhost:3333/login
 Content-Type: application/json
 
 {
-    "email": "Duda@gamil.com",
-    "senha": "Duda123"
+    "email": "admin@gamil.com",
+    "senha": "admin123"
 }
 
 ###
-GET http://localhost:3333/horarios
+GET http://localhost:3333/schedules/free
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NGE0NjYyMi01MWZlLTQyOTgtYWJhZS03ZWM1Y2QwMzEwYTQiLCJpYXQiOjE3NDUxMTc0NzEsImV4cCI6MTc0NTExODM3MX0.v9IWwGpb8Ywd-U6xdggWVgX4s9q-cJPGvJaEnEtxCNM
 
 ###
-POST http://localhost:3333/agendamento
+GET http://localhost:3333/schedules/free/day/2025-04-20
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NGE0NjYyMi01MWZlLTQyOTgtYWJhZS03ZWM1Y2QwMzEwYTQiLCJpYXQiOjE3NDUxMTc0NzEsImV4cCI6MTc0NTExODM3MX0.v9IWwGpb8Ywd-U6xdggWVgX4s9q-cJPGvJaEnEtxCNM
+
+###
+POST http://localhost:3333/schedule
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NGE0NjYyMi01MWZlLTQyOTgtYWJhZS03ZWM1Y2QwMzEwYTQiLCJpYXQiOjE3NDUxMTc0NzEsImV4cCI6MTc0NTExODM3MX0.v9IWwGpb8Ywd-U6xdggWVgX4s9q-cJPGvJaEnEtxCNM
 
 {
     "destinary_name": "Joao",
     "destinary_email": "vx722100@gmail.com",
-    "dayId": "570dc347-0a9f-46f3-9f50-b57de6f0ff02",
-    "horarioId": "cf5abcbd-31f7-43fa-8c5d-30e1ac538b6a"
+    "dayId": "cf38deb7-414e-47e2-814d-f50c4f1b46ff",
+    "horarioId": "68802b8e-0b4a-414d-924c-ef9a09135ac4"
 }
-

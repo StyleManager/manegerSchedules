@@ -10,6 +10,9 @@
             auth: {
                 user: account.user,
                 pass: account.pass,
+            },
+            tls: {
+                rejectUnauthorized: false,
             }
         });
         return transporter;

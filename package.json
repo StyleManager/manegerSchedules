@@ -4,13 +4,15 @@
   "description": "Requisitos:\r   1- Criar um sistema básico onde os clientes possam visualizar os horários disponíveis e marcar agendamentos.\r   - agendamentos para o dia, só podem acontecer com horarios 6h de antecedencia.\r   - banco de dados (Marcar agendamentos até 1 semena à frente) \r   - Após fazer o agendamento o cliente recebera por email, uma validação para confirmar (Só depois o agendamento é salvo no banco)",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch --env-file=.env src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cookie": "^11.0.2",
     "@fastify/cors": "^10.0.2",
+    "@fastify/jwt": "^9.1.0",
     "@fastify/swagger": "^9.4.1",
     "@fastify/swagger-ui": "^5.2.1",
     "@prisma/client": "^6.2.1",
@@ -18,6 +20,7 @@
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
+    "fastify-plugin": "^5.0.1",
     "fastify-type-provider-zod": "^4.0.2",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.16",
