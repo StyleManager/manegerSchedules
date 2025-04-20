@@ -8,20 +8,27 @@ export function GetSchedulesDay(server: FastifyTypedInstance){
     server.get("/schedules/free/day/:day", {
         preHandler: Authenticate,
         schema: {
-            description: "Horarios de atendimento",
+            description: "Horarios de atendimento do dia",
             params: z.object({
                 day: z.string(),
             }),
             response: {
-                200: z.object({
-                    dayId: string().uuid(),
-                    horarios: z.array(
-                        z.object({
-                            id: z.string(),
-                            horario: z.string()
-                        })
-                    ),
-                }),
+                 200: z.array(
+                    z.object({
+                        horario: z.object({
+                            diaHorarioId: z.string(),
+                            horario: z.string(),
+                            livre: z.boolean()
+                        }),
+                        cabeleleiros: z.array(
+                            z.object({
+                                cabeleleiroId: z.string(),
+                                nome: z.string(),
+                                description: z.string()
+                            }),
+                        )
+                    })
+                 ),
                 401: z.object({
                     message: z.string(),
                 }),
@@ -45,25 +52,35 @@ export function GetSchedulesDay(server: FastifyTypedInstance){
                     }
                 },
                 include: {
-                    Horarios: true,
+                    Dias_has_Horarios: {
+                        include: {
+                            cabeleleiro_has_Disponibilidade: {
+                                include: {
+                                    cabeleleiro: true
+                                }
+                            },
+                            horario: true,
+                        }
+                    }
                 }
             })
 
             if (!horarios) { return reply.status(401).send({message: "Erro ao procurar dia"})} 
 
-            const horariosArray = horarios.Horarios
-            .filter(h => h.livre === true )
-            .map(h => {
-                return {
-                    id: h.id,
-                    horario: h.horario
-                }
-            })
-
-            const data = {
-                dayId: horarios.id,
-                horarios: horariosArray
-            }
+            const data = horarios.Dias_has_Horarios
+            .filter(h => h.horario.livre === true)
+            .map(horario => ({
+                horario: {
+                    diaHorarioId: horario.id,
+                    ...horario.horario
+                },
+                cabeleleiros: horario.cabeleleiro_has_Disponibilidade
+                .map(c => ({
+                    cabeleleiroId: c.cabeleleiroId,
+                    nome: c.cabeleleiro.nome,
+                    description: c.cabeleleiro.description
+                }))
+            }))
 
             return reply.status(200).send(data)
         } 

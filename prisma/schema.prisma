@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -20,30 +17,78 @@ model Clientes {
 }
 
 model Agendamentos {
-  id            String @id @default(uuid())
-  clientId      String 
-  client        Clientes @relation(fields: [clientId], references: [id])
-  dayId         String
-  day           Dias     @relation(fields: [dayId], references: [id])
-  horarioId     String
-  horario       Horarios @relation(fields: [horarioId], references: [id])
-  confirmado    Boolean @default(false)
+  id              String @id @default(uuid())
+  clientId        String 
+  client          Clientes @relation(fields: [clientId], references: [id])
+  cabeleleiroId   String
+  cabeleleiro     Cabeleleiros @relation(fields: [cabeleleiroId], references: [id])
+  confirmado      Boolean @default(false)
+  diasHorariosId  String
+  diasHorarios    Dias_has_Horarios @relation(fields: [diasHorariosId], references: [id])
+  servicosId      String 
+  servicos        Servicos @relation(fields: [servicosId], references: [id])
+}
+
+model Cabeleleiros {
+    id              String @id @default(uuid())
+    nome            String
+    description     String @default("Vazio")
+
+    Agendamentos Agendamentos[]
+    Servicos Servicos[]
+    cabeleleiro_has_Disponibilidade cabeleleiro_has_Disponibilidade[]
+}
+
+model cabeleleiro_has_Disponibilidade {
+    id  String @id @default(uuid())
+    cabeleleiroId   String
+    cabeleleiro     Cabeleleiros @relation(fields: [cabeleleiroId], references: [id])
+    diasHorariosId  String
+    diasHorarios    Dias_has_Horarios @relation(fields: [diasHorariosId], references: [id])
+}
+
+model Servicos {
+  id              String @id @default(uuid())
+  tipoServicoId   String
+  tipoServico     TipoServico @relation(fields: [tipoServicoId], references: [id])
+  cabeleleiroId   String
+  cabeleleiro     Cabeleleiros @relation(fields: [cabeleleiroId], references: [id])
+
+  Agendamentos Agendamentos[]
+}
+
+model TipoServico {
+   id     String @id @default(uuid())
+   nome   String
+   Preco  Float
+
+   Servicos Servicos[]
+}
+
+
+model Dias_has_Horarios {
+   id      String @id @default(uuid())
+   dayId         String
+   day           Dias     @relation(fields: [dayId], references: [id])
+   horarioId     String
+   horario       Horarios @relation(fields: [horarioId], references: [id])
+
+   Agendamentos Agendamentos[]
+
+   cabeleleiro_has_Disponibilidade cabeleleiro_has_Disponibilidade[]
 }
 
 model Dias {
   id      String @id @default(uuid())
   day     DateTime @unique
 
-  Agendamentos Agendamentos[]
-  Horarios Horarios[]
+  Dias_has_Horarios Dias_has_Horarios[]
 }
 
 model Horarios {
   id        String @id @default(uuid())
-  dayId     String
-  day       Dias   @relation(fields: [dayId], references: [id])
   livre   Boolean @default(true)
   horario   String
 
-  Agendamentos Agendamentos[]
+  Dias_has_Horarios Dias_has_Horarios[]
 }

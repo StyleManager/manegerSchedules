@@ -11,6 +11,7 @@ import { GetSchedules } from "./routes/schedules/getSchedules";
 import { GetSchedulesDay } from "./routes/schedules/getSchedules-day";
 import authenticatePlugin from "./plugin/authenticate-plugin";
 import { ConfirmationLink } from "./routes/schedules/get-confirmation-link";
+import { GetTypeSchedules } from "./routes/schedules/getTypeSchedules";
 
 const server = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -45,6 +46,7 @@ server.register(GetUser);
 server.register(GetSchedulesDay)
 server.register(PostSchedules);
 server.register(ConfirmationLink);
+server.register(GetTypeSchedules)
 
 server.listen({port: 3333}).then(() => {
     console.log("Server running!")

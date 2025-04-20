@@ -4,6 +4,7 @@
   "description": "Requisitos:\r   1- Criar um sistema básico onde os clientes possam visualizar os horários disponíveis e marcar agendamentos.\r   - agendamentos para o dia, só podem acontecer com horarios 6h de antecedencia.\r   - banco de dados (Marcar agendamentos até 1 semena à frente) \r   - Após fazer o agendamento o cliente recebera por email, uma validação para confirmar (Só depois o agendamento é salvo no banco)",
   "main": "index.js",
   "scripts": {
+    "seed": "tsx ./prisma/seed.ts",
     "dev": "tsx watch --env-file=.env src/server.ts"
   },
   "keywords": [],

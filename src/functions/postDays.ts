@@ -22,13 +22,30 @@ export async function PostDays(){
 
             for(let j = 0; j < 8; j++){
                 const horario = `${9 + j}:00`;
-                await prisma.horarios.create({
+                const createdHorario = await prisma.horarios.create({
                     data: {
-                        horario,
-                        dayId: createdDay.id,
+                        horario: horario,
                         livre: true
                     }
                 })
+
+                const diaHorario = await prisma.dias_has_Horarios.create({
+                    data: {
+                        dayId: createdDay.id,
+                        horarioId: createdHorario.id
+                    }
+                })
+
+                const cabeleleiros = await prisma.cabeleleiros.findMany();
+                for(const cabeleleiro of cabeleleiros) {
+                    const cabeleleiro_has_disponibilidade = await prisma.cabeleleiro_has_Disponibilidade.create({
+                        data: {
+                            cabeleleiroId: cabeleleiro.id,
+                            diasHorariosId: diaHorario.id
+                        }
+                    })
+                }
+
                 console.log(`Horário criado: ${horario} para o dia ${createdDay.day}`);
             }
         }

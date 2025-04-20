@@ -14,30 +14,40 @@ export function PostSchedules(server: FastifyTypedInstance){
             body: z.object({
                 destinary_name: z.string(),
                 destinary_email: z.string().email(),
-                dayId: z.string().uuid(),
-                horarioId: z.string().uuid()
+                dayHorarioId: z.string().uuid(),
+                cabeleleiroId: z.string(),
+                tipoServicoId: z.string(),
             }),
         }
     }, async (request, reply)=> {
         try {
 
             const sub = request.user.sub;
-            const {destinary_name, destinary_email, dayId, horarioId} = request.body;
+            const {destinary_name, destinary_email, dayHorarioId, tipoServicoId, cabeleleiroId} = request.body;
 
-            const dia = await prisma.dias.findUnique({  where: { id: dayId} })
-            if(!dia){ return reply.status(401).send("Dia invalido ou já lotado!");}
+            const data = await prisma.dias_has_Horarios.findUnique({  where: { id: dayHorarioId} })
+            if(!data){ return reply.status(401).send("Dia invalido ou já lotado!");}
             
             const horarioLivre = await prisma.horarios.findUnique({
                 where: {
-                    id: horarioId,
+                    id: data.horarioId,
                     livre: true,
                 }
             })
-
             if(!horarioLivre){ return reply.status(401).send("Erro ao tentar agendar horario!");}
 
-            const date = dayjs(dia?.day).format("DD/MM");
-            const confirmatedLink = `http://localhost:3333/schedules/confirmation/${horarioId}/${sub}`;
+            const day = await prisma.dias.findUnique({ where: { id: data.dayId, }})
+            if(!day){ return reply.status(401).send("Erro ao tentar agendar horario!");}
+
+            const servico = await prisma.servicos.create({
+                data: {
+                    tipoServicoId,
+                    cabeleleiroId,
+                }
+            })
+
+            const date = dayjs(day.day).format("DD/MM");
+            const confirmatedLink = `http://localhost:3333/schedules/confirmation/${data.id}/${sub}/${servico.id}`;
 
             const mail = await getMailCLient();
             const message = await mail.sendMail({
@@ -52,7 +62,7 @@ export function PostSchedules(server: FastifyTypedInstance){
                 subject: `Email de confirmação do agendamento do dia ${date} às ${horarioLivre.horario}`,
                 html: `
                         <div style="font-family: sans-serif; font-size: 16px; line-height: 1.6;">
-                        <p>Você pré-agendou um corte de cabelo para o dia <strong>${date}</strong>, às <strong>${horarioLivre.horario}.</strong></p>
+                        <p>Você pré-agendou um corte de cabelo para o dia <strong>${date}</strong>, às <strong>${horarioLivre.horario}.</strong></p>                      
                         <p>Para confirmar seu corte, clique no link abaixo:</p>
                         <p><a href="${confirmatedLink}">Confirmar agendamento</a></p>
                         <p>Caso você não saiba do que se trata esse e-mail, apenas ignore ele.</p>

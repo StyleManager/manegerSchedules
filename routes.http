@@ -18,20 +18,25 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3333/schedules/free
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NGE0NjYyMi01MWZlLTQyOTgtYWJhZS03ZWM1Y2QwMzEwYTQiLCJpYXQiOjE3NDUxMTc0NzEsImV4cCI6MTc0NTExODM3MX0.v9IWwGpb8Ywd-U6xdggWVgX4s9q-cJPGvJaEnEtxCNM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlM2NkZGJmNy01ZjVjLTQ0NzMtYjZkNS01YjJiYTA1MWE1ODMiLCJpYXQiOjE3NDUxODc3OTgsImV4cCI6MTc0NTE4ODY5OH0.6o6tNyeyhsdeS_h2-2KdEfYvs3zKEVji8qKqERzGmk8
 
 ###
-GET http://localhost:3333/schedules/free/day/2025-04-20
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NGE0NjYyMi01MWZlLTQyOTgtYWJhZS03ZWM1Y2QwMzEwYTQiLCJpYXQiOjE3NDUxMTc0NzEsImV4cCI6MTc0NTExODM3MX0.v9IWwGpb8Ywd-U6xdggWVgX4s9q-cJPGvJaEnEtxCNM
+GET http://localhost:3333/schedules/type
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlM2NkZGJmNy01ZjVjLTQ0NzMtYjZkNS01YjJiYTA1MWE1ODMiLCJpYXQiOjE3NDUxODc3OTgsImV4cCI6MTc0NTE4ODY5OH0.6o6tNyeyhsdeS_h2-2KdEfYvs3zKEVji8qKqERzGmk8
+
+###
+GET http://localhost:3333/schedules/free/day/2025-04-21
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlM2NkZGJmNy01ZjVjLTQ0NzMtYjZkNS01YjJiYTA1MWE1ODMiLCJpYXQiOjE3NDUxODc3OTgsImV4cCI6MTc0NTE4ODY5OH0.6o6tNyeyhsdeS_h2-2KdEfYvs3zKEVji8qKqERzGmk8
 
 ###
 POST http://localhost:3333/schedule
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NGE0NjYyMi01MWZlLTQyOTgtYWJhZS03ZWM1Y2QwMzEwYTQiLCJpYXQiOjE3NDUxMTc0NzEsImV4cCI6MTc0NTExODM3MX0.v9IWwGpb8Ywd-U6xdggWVgX4s9q-cJPGvJaEnEtxCNM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlM2NkZGJmNy01ZjVjLTQ0NzMtYjZkNS01YjJiYTA1MWE1ODMiLCJpYXQiOjE3NDUxODc3OTgsImV4cCI6MTc0NTE4ODY5OH0.6o6tNyeyhsdeS_h2-2KdEfYvs3zKEVji8qKqERzGmk8
 
 {
-    "destinary_name": "Joao",
-    "destinary_email": "vx722100@gmail.com",
-    "dayId": "cf38deb7-414e-47e2-814d-f50c4f1b46ff",
-    "horarioId": "68802b8e-0b4a-414d-924c-ef9a09135ac4"
+    "destinary_name": "admin",
+    "destinary_email": "admin@gamil.com",
+    "dayHorarioId": "2239b76d-9729-41e0-9b07-f72548f14b0a",
+    "tipoServicoId": "1",
+    "cabeleleiroId": "1"
 }
