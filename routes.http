@@ -2,9 +2,9 @@ POST http://localhost:3333/cadastrar
 Content-Type: application/json
 
 {
-    "name": "admin",
-    "email": "admin@gamil.com",
-    "senha": "admin123"
+    "name": "aninha",
+    "email": "aninha@gamil.com",
+    "senha": "zezinho"
 }
 
 ###
@@ -12,31 +12,35 @@ POST http://localhost:3333/login
 Content-Type: application/json
 
 {
-    "email": "admin@gamil.com",
-    "senha": "admin123"
+    "email": "aninha@gamil.com",
+    "senha": "zezinho"
 }
 
 ###
 GET http://localhost:3333/schedules/free
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlM2NkZGJmNy01ZjVjLTQ0NzMtYjZkNS01YjJiYTA1MWE1ODMiLCJpYXQiOjE3NDUxODc3OTgsImV4cCI6MTc0NTE4ODY5OH0.6o6tNyeyhsdeS_h2-2KdEfYvs3zKEVji8qKqERzGmk8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDUyNjcwMDQsImV4cCI6MTc0NTI2NzkwNH0.GW9vYqG32nwWVFg6RwkbVDq8MMdD2rehRJqj4DC-i94 
 
 ###
 GET http://localhost:3333/schedules/type
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlM2NkZGJmNy01ZjVjLTQ0NzMtYjZkNS01YjJiYTA1MWE1ODMiLCJpYXQiOjE3NDUxODc3OTgsImV4cCI6MTc0NTE4ODY5OH0.6o6tNyeyhsdeS_h2-2KdEfYvs3zKEVji8qKqERzGmk8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDUyNjcwMDQsImV4cCI6MTc0NTI2NzkwNH0.GW9vYqG32nwWVFg6RwkbVDq8MMdD2rehRJqj4DC-i94 
 
 ###
-GET http://localhost:3333/schedules/free/day/2025-04-21
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlM2NkZGJmNy01ZjVjLTQ0NzMtYjZkNS01YjJiYTA1MWE1ODMiLCJpYXQiOjE3NDUxODc3OTgsImV4cCI6MTc0NTE4ODY5OH0.6o6tNyeyhsdeS_h2-2KdEfYvs3zKEVji8qKqERzGmk8
+GET http://localhost:3333/schedules/free/day/2025-04-23
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDUyNjcwMDQsImV4cCI6MTc0NTI2NzkwNH0.GW9vYqG32nwWVFg6RwkbVDq8MMdD2rehRJqj4DC-i94 
+
+###
+GET http://localhost:3333/schedules/hairDresser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDUyNjcwMDQsImV4cCI6MTc0NTI2NzkwNH0.GW9vYqG32nwWVFg6RwkbVDq8MMdD2rehRJqj4DC-i94 
 
 ###
 POST http://localhost:3333/schedule
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDUyNjcwMDQsImV4cCI6MTc0NTI2NzkwNH0.GW9vYqG32nwWVFg6RwkbVDq8MMdD2rehRJqj4DC-i94 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlM2NkZGJmNy01ZjVjLTQ0NzMtYjZkNS01YjJiYTA1MWE1ODMiLCJpYXQiOjE3NDUxODc3OTgsImV4cCI6MTc0NTE4ODY5OH0.6o6tNyeyhsdeS_h2-2KdEfYvs3zKEVji8qKqERzGmk8
 
 {
     "destinary_name": "admin",
     "destinary_email": "admin@gamil.com",
-    "dayHorarioId": "2239b76d-9729-41e0-9b07-f72548f14b0a",
+    "dayHorarioId": "e0146903-7467-416b-b7c8-a099c431abc2",
     "tipoServicoId": "1",
     "cabeleleiroId": "1"
 }

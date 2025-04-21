@@ -3,6 +3,8 @@ import { Authenticate } from "../../middleware/authenticator";
 import { FastifyTypedInstance } from "../../types/fastifyTyped";
 import z, { string } from "zod";
 import dayjs from "dayjs";
+import { verifyDay } from "../../functions/verifyDay";
+import { verifyDayHour } from "../../functions/verifyDayHour";
 
 export function GetSchedulesDay(server: FastifyTypedInstance){
     server.get("/schedules/free/day/:day", {
@@ -40,7 +42,10 @@ export function GetSchedulesDay(server: FastifyTypedInstance){
     }, async (request, reply) => {
         const { day } = request.params
         try {
-            
+
+            const dayChecked = verifyDay(day)
+            if(!dayChecked) {return reply.status(401).send({message: "Dia invalido!"})}
+
             const start = dayjs(day).startOf("day").toDate()
             const end = dayjs(day).endOf("day").toDate()
             
@@ -65,7 +70,7 @@ export function GetSchedulesDay(server: FastifyTypedInstance){
                 }
             })
 
-            if (!horarios) { return reply.status(401).send({message: "Erro ao procurar dia"})} 
+            if (!horarios) { return reply.status(401).send({message: "Dia não disponivel para agendamento!"})} 
 
             const data = horarios.Dias_has_Horarios
             .filter(h => h.horario.livre === true)
@@ -81,6 +86,9 @@ export function GetSchedulesDay(server: FastifyTypedInstance){
                     description: c.cabeleleiro.description
                 }))
             }))
+            .filter(hFilter => verifyDayHour(day, String(hFilter.horario.horario)))
+
+            if(data.length <= 0) {return reply.status(401).send({message: "Não há horarios disponiveis para este dia"})}
 
             return reply.status(200).send(data)
         } 

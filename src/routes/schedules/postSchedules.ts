@@ -6,6 +6,7 @@ import { prisma } from "../../lib/prisma"
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import dayjs from "dayjs";
 import { Authenticate } from "../../middleware/authenticator";
+import { verifyDayHour } from "../../functions/verifyDayHour";
 
 export function PostSchedules(server: FastifyTypedInstance){
     server.withTypeProvider<ZodTypeProvider>().post("/schedule",{
@@ -47,6 +48,9 @@ export function PostSchedules(server: FastifyTypedInstance){
             })
 
             const date = dayjs(day.day).format("DD/MM");
+            const scheduleChecked = verifyDayHour(date, horarioLivre.horario)
+            if(!scheduleChecked) {return reply.status(401).send({message: "Você precisa agendar com 2 horas de antecedencia"})}
+
             const confirmatedLink = `http://localhost:3333/schedules/confirmation/${data.id}/${sub}/${servico.id}`;
 
             const mail = await getMailCLient();
