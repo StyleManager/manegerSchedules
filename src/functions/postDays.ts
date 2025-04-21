@@ -1,12 +1,17 @@
 import dayjs from "dayjs";
 import {prisma} from "../lib/prisma";
+import { verifySundayHoliday } from "./verifySundayHoliday";
 
 export async function PostDays(){
     const date = new Date();
     const day = dayjs(date);
-
+      
     for(let i = 0; i < 7; i++){
         const newDate = dayjs(day).add(i, 'day').startOf('day').toDate();
+       
+        const checkDay = verifySundayHoliday(newDate);
+        if(checkDay) { continue }
+
         const resultado = await prisma.dias.findUnique({
             where: {
                 day: newDate

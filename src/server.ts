@@ -7,11 +7,12 @@ import { PostDays } from "./functions/postDays";
 import {PostUser } from "./routes/user/Create-user";
 import { GetUser } from "./routes/user/Login-user";
 import { PostSchedules } from "./routes/schedules/postSchedules";
-import { GetSchedules } from "./routes/schedules/getSchedules";
+import { GetSchedules } from "./routes/schedules/getSchedule-lists";
 import { GetSchedulesDay } from "./routes/schedules/getSchedules-day";
 import authenticatePlugin from "./plugin/authenticate-plugin";
 import { ConfirmationLink } from "./routes/schedules/get-confirmation-link";
-import { GetTypeSchedules } from "./routes/schedules/getTypeSchedules";
+import { GetTypeSchedules } from "./routes/schedules/getTypeSchedules-list";
+import { GetHairDresser } from "./routes/schedules/getHairDresser";
 
 const server = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -40,13 +41,14 @@ server.addHook("onReady", async () => {
 
 server.register(authenticatePlugin)
 
+server.register(GetHairDresser);
 server.register(GetSchedules);
-server.register(PostUser);
 server.register(GetUser);
-server.register(GetSchedulesDay)
+server.register(GetTypeSchedules);
+server.register(GetSchedulesDay);
+server.register(PostUser);
 server.register(PostSchedules);
 server.register(ConfirmationLink);
-server.register(GetTypeSchedules)
 
 server.listen({port: 3333}).then(() => {
     console.log("Server running!")

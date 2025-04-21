@@ -42,7 +42,7 @@ export function PostUser(server: FastifyTypedInstance){
                     }
                 })
 
-                const {senha:_, name:__, ...formatedUser} = user
+                const {senha:_, id:__, ...formatedUser} = user
 
                 return reply.status(201).send(formatedUser);
            
