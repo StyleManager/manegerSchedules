@@ -8,7 +8,7 @@ export default fp(async (server: FastifyInstance) => {
     server.register(cookie);
     server.register(jwt, {
         secret: env.SECRET_KEY,
-        sign: { expiresIn: "15min"}
+        sign: { expiresIn: "2h"}
     })
 
     server.decorate("authenticate", async (request: FastifyRequest, reply: FastifyReply) => {

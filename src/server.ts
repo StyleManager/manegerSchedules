@@ -13,6 +13,8 @@ import authenticatePlugin from "./plugin/authenticate-plugin";
 import { ConfirmationLink } from "./routes/schedules/get-confirmation-link";
 import { GetTypeSchedules } from "./routes/schedules/getTypeSchedules-list";
 import { GetHairDresser } from "./routes/schedules/getHairDresser";
+import { GetHairDresserHour } from "./routes/schedules/getHairDresserHour";
+import { GetHairDresserDay } from "./routes/schedules/getHairDresserDay";
 
 const server = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -49,7 +51,9 @@ server.register(GetSchedulesDay);
 server.register(PostUser);
 server.register(PostSchedules);
 server.register(ConfirmationLink);
+server.register(GetHairDresserHour)
+server.register(GetHairDresserDay)
 
 server.listen({port: 3333}).then(() => {
-    console.log("Server running!")
+    console.log(`Server running in 3333`)
 })

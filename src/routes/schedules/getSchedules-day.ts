@@ -67,7 +67,7 @@ export function GetSchedulesDay(server: FastifyTypedInstance){
                             horario: true,
                         }
                     }
-                }
+                },
             })
 
             if (!horarios) { return reply.status(401).send({message: "Dia não disponivel para agendamento!"})} 

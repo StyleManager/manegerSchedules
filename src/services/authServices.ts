@@ -11,7 +11,7 @@ export class AuthService {
 
         const senhaValidada = await bcrypt.compare(senha, user.senha);
         if(!senhaValidada) {throw new Error("Senha invalida!")}
-        const acessToken = this.jwt.sign({sub: user.id}, {expiresIn: "15min"})
+        const acessToken = this.jwt.sign({sub: user.id}, {expiresIn: "2h"})
         const refreshToken = this.jwt.sign({sub: user.id}, {expiresIn: "7d"})
         
         return {acessToken, refreshToken}
