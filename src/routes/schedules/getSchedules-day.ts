@@ -6,8 +6,8 @@ import dayjs from "dayjs";
 import { verifyDay } from "../../functions/verifyDay";
 import { verifyDayHour } from "../../functions/verifyDayHour";
 
-export function GetSchedulesDay(server: FastifyTypedInstance){
-    server.get("/schedules/free/day/:day", {
+export function GetSchedulesHourByDay(server: FastifyTypedInstance){
+    server.get("/schedules/free/hour/:day", {
         preHandler: Authenticate,
         schema: {
             description: "Horarios de atendimento do dia",
@@ -54,6 +54,13 @@ export function GetSchedulesDay(server: FastifyTypedInstance){
                     day: {
                         gte: start,
                         lte: end
+                    },
+                    Dias_has_Horarios: {
+                        some: {
+                            horario: {
+                                livre: true
+                            }
+                        }
                     }
                 },
                 include: {
@@ -70,7 +77,7 @@ export function GetSchedulesDay(server: FastifyTypedInstance){
                 },
             })
 
-            if (!horarios) { return reply.status(401).send({message: "Dia não disponivel para agendamento!"})} 
+            if (!horarios) { return reply.status(401).send({message: "Horario não disponivel para agendamento!"})} 
 
             const data = horarios.Dias_has_Horarios
             .filter(h => h.horario.livre === true)

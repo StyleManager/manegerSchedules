@@ -8,13 +8,14 @@ import {PostUser } from "./routes/user/Create-user";
 import { GetUser } from "./routes/user/Login-user";
 import { PostSchedules } from "./routes/schedules/postSchedules";
 import { GetSchedules } from "./routes/schedules/getSchedule-lists";
-import { GetSchedulesDay } from "./routes/schedules/getSchedules-day";
+import { GetSchedulesHourByDay } from "./routes/schedules/getSchedules-day";
 import authenticatePlugin from "./plugin/authenticate-plugin";
 import { ConfirmationLink } from "./routes/schedules/get-confirmation-link";
 import { GetTypeSchedules } from "./routes/schedules/getTypeSchedules-list";
 import { GetHairDresser } from "./routes/schedules/getHairDresser";
 import { GetHairDresserHour } from "./routes/schedules/getHairDresserHour";
 import { GetHairDresserDay } from "./routes/schedules/getHairDresserDay";
+import { GetSchedulesDayByHour } from "./routes/schedules/getSchedules-hour";
 
 const server = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -47,7 +48,8 @@ server.register(GetHairDresser);
 server.register(GetSchedules);
 server.register(GetUser);
 server.register(GetTypeSchedules);
-server.register(GetSchedulesDay);
+server.register(GetSchedulesHourByDay);
+server.register(GetSchedulesDayByHour);
 server.register(PostUser);
 server.register(PostSchedules);
 server.register(ConfirmationLink);
