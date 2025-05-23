@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import {prisma} from "../lib/prisma";
+import {prisma} from "../../lib/prisma";
 import { verifySundayHoliday } from "./verifySundayHoliday";
 
 export async function PostDays(){

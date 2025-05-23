@@ -7,6 +7,6 @@ export function verifyDay(day: string){
 
     const agendamento = dayjs(day).startOf("day")
     const agendamentoValido = dayjs(agendamento).isAfter(nowDate) || dayjs(agendamento).isSame(nowDate)
-
+    
     return agendamentoValido
 }

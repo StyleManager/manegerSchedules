@@ -3,8 +3,8 @@ POST http://localhost:3333/cadastrar
 Content-Type: application/json
 
 {
-    "name": "aninha",
-    "email": "aninha@gamil.com",
+    "name": "joseph",
+    "email": "joseph@gamil.com",
     "senha": "zezinho"
 }
 
@@ -13,46 +13,50 @@ POST http://localhost:3333/login
 Content-Type: application/json
 
 {
-    "email": "aninha@gamil.com",
+    "email": "joseph@gamil.com",
     "senha": "zezinho"
 }
 
 #List Schedules
 ###
 GET http://localhost:3333/schedules/free
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDc3NTcyODAsImV4cCI6MTc0Nzc2NDQ4MH0.tzOQTD-PGMmynpCXUta5z9K6UTJHMHaEzQ34v5EHzac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgwMjM5MDQsImV4cCI6MTc0ODAzMTEwNH0.Q_6WZkf7Wr64pQbxOBb6rDfCUJcBDCkAlNr_8fJ3cWY
+
 ###
 GET http://localhost:3333/schedules/free/day/12:00
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDc3NTcyODAsImV4cCI6MTc0Nzc2NDQ4MH0.tzOQTD-PGMmynpCXUta5z9K6UTJHMHaEzQ34v5EHzac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgwMjM5MDQsImV4cCI6MTc0ODAzMTEwNH0.Q_6WZkf7Wr64pQbxOBb6rDfCUJcBDCkAlNr_8fJ3cWY
+
 ###
 GET http://localhost:3333/schedules/free/hour/2025-05-26
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDc3NTcyODAsImV4cCI6MTc0Nzc2NDQ4MH0.tzOQTD-PGMmynpCXUta5z9K6UTJHMHaEzQ34v5EHzac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgwMjM5MDQsImV4cCI6MTc0ODAzMTEwNH0.Q_6WZkf7Wr64pQbxOBb6rDfCUJcBDCkAlNr_8fJ3cWY
+
 ###
-GET http://localhost:3333/schedules/hairDresser/hour/2025-05-21/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDc3NTcyODAsImV4cCI6MTc0Nzc2NDQ4MH0.tzOQTD-PGMmynpCXUta5z9K6UTJHMHaEzQ34v5EHzac
+GET http://localhost:3333/schedules/hairDresser/hour/2025-05-27/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgwMjM5MDQsImV4cCI6MTc0ODAzMTEwNH0.Q_6WZkf7Wr64pQbxOBb6rDfCUJcBDCkAlNr_8fJ3cWY
+
 ###
 GET http://localhost:3333/schedules/hairDresser/day/12:00/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDc3NTcyODAsImV4cCI6MTc0Nzc2NDQ4MH0.tzOQTD-PGMmynpCXUta5z9K6UTJHMHaEzQ34v5EHzac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgwMjM5MDQsImV4cCI6MTc0ODAzMTEwNH0.Q_6WZkf7Wr64pQbxOBb6rDfCUJcBDCkAlNr_8fJ3cWY
 
 #List Services
 ###
 GET http://localhost:3333/schedules/type
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDc3NTcyODAsImV4cCI6MTc0Nzc2NDQ4MH0.tzOQTD-PGMmynpCXUta5z9K6UTJHMHaEzQ34v5EHzac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgwMjM5MDQsImV4cCI6MTc0ODAzMTEwNH0.Q_6WZkf7Wr64pQbxOBb6rDfCUJcBDCkAlNr_8fJ3cWY
 
 ###
 GET http://localhost:3333/schedules/hairDresser
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDc3NTcyODAsImV4cCI6MTc0Nzc2NDQ4MH0.tzOQTD-PGMmynpCXUta5z9K6UTJHMHaEzQ34v5EHzac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgwMjM5MDQsImV4cCI6MTc0ODAzMTEwNH0.Q_6WZkf7Wr64pQbxOBb6rDfCUJcBDCkAlNr_8fJ3cWY
 
 #Create Schedule
 ###
 POST http://localhost:3333/schedule
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDU0NmRhNi05ZjgwLTQ1NjYtYjg3Yi0xZDI5YWZlZWNiMjAiLCJpYXQiOjE3NDc3NTcyODAsImV4cCI6MTc0Nzc2NDQ4MH0.tzOQTD-PGMmynpCXUta5z9K6UTJHMHaEzQ34v5EHzac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgwMjM5MDQsImV4cCI6MTc0ODAzMTEwNH0.Q_6WZkf7Wr64pQbxOBb6rDfCUJcBDCkAlNr_8fJ3cWY
 Content-Type: application/json
 
 {
-    "destinary_name": "admin",
-    "destinary_email": "admin@gamil.com",
-    "dayHorarioId": "e0146903-7467-416b-b7c8-a099c431abc2",
+    "destinary_name": "joseph",
+    "destinary_email": "joseph@gamil.com",
+    "dayHorarioId": "8b0ab28a-e068-493e-967d-d3f5983e4794",
     "tipoServicoId": "1",
     "cabeleleiroId": "1"
 }

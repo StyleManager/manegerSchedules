@@ -7,7 +7,7 @@ export function GetHairDresser(server: FastifyTypedInstance){
     server.get("/schedules/hairDresser", {
         preHandler: Authenticate,
         schema: {
-            description: "Listagem dos tipos de sevicos",
+            description: "Listagem dos profissionais",
             response: {
                  200: z.array(
                     z.object({
@@ -26,8 +26,8 @@ export function GetHairDresser(server: FastifyTypedInstance){
         }
     }, async (request, reply) => {
         try {
-            
             const hairDresser = await prisma.cabeleleiros.findMany();
+            if(!hairDresser) {return reply.status(401).send({message: "Error ao tentar encontrar os cabeleleiros"})}
             return reply.status(200).send(hairDresser);
         } 
         catch (error) {
