@@ -1,8 +1,7 @@
 import { FastifyTypedInstance } from "../../types/fastifyTyped";
 import z from "zod";
-import { prisma } from "../../lib/prisma";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import bcrypt from "bcrypt";
+import { handlerCreateUser } from "../../functions/users/handleCreateUser";
 
 export function PostUser(server: FastifyTypedInstance){
     server.withTypeProvider<ZodTypeProvider>().post("/cadastrar", {
@@ -29,23 +28,9 @@ export function PostUser(server: FastifyTypedInstance){
     }, async (request, reply)=> {
         try {
             const {name, email, senha} = request.body;
-            const existUser = await prisma.clientes.findUnique({ where: { email } })
-                                
-            if(existUser){ return reply.status(401).send({message: "Esse email já está sendo utilizado!"}) }
+            const {senha:_, id:__, ...formatedUser} = await handlerCreateUser({name, email, senha})
 
-                const hasedPassword = await bcrypt.hash(senha, 10);
-                const user = await prisma.clientes.create({
-                    data: {
-                        name,
-                        email,
-                        senha: hasedPassword
-                    }
-                })
-
-                const {senha:_, id:__, ...formatedUser} = user
-
-                return reply.status(201).send(formatedUser);
-           
+            return reply.status(201).send(formatedUser);
         } catch(error) {
             return reply.status(500).send({error: "Ocorreu um erro inesperado!"})
         }

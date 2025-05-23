@@ -26,9 +26,7 @@ export function GetTypeSchedules(server: FastifyTypedInstance){
         }
     }, async (request, reply) => {
         try {
-            
             const typesServices = await prisma.tipoServico.findMany();
-
             return reply.status(200).send(typesServices);
         } 
         catch (error) {

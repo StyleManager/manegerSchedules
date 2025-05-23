@@ -5,6 +5,7 @@ import { prisma } from "../../lib/prisma";
 import bcrypt from "bcrypt";
 import {env} from "../../env";
 import { AuthService } from "../../services/authServices";
+import { handleLogin } from "../../functions/users/handleLogin";
 
 export function GetUser(server: FastifyTypedInstance){
     server.post("/login", {
@@ -29,20 +30,8 @@ export function GetUser(server: FastifyTypedInstance){
         try { 
 
             const authenticate = new AuthService(server.jwt)
-            
             const {email, senha} = request.body;
-
-            const user = await prisma.clientes.findUnique({ where: { email }})
-            if(!user){
-                return reply.status(401).send({error: "Usuario não encontrado!"});
-            }
-
-            const senhaCorreta = bcrypt.compare(senha, user.senha);
-            if(!senhaCorreta){
-                return reply.status(401).send({error: "Erro interno do servidor"});
-            }
-
-            const {acessToken, refreshToken} = await authenticate.login(email, senha)
+            const {acessToken, refreshToken} = await handleLogin({email, senha}, server.jwt)
 
             reply.setCookie("refreshToken", refreshToken, {
                 httpOnly: true,
@@ -51,7 +40,7 @@ export function GetUser(server: FastifyTypedInstance){
                 path: "/",
                 maxAge: 60 * 60 * 24 * 7
             })
-            
+
             return reply.status(201).send({acessToken})
         } catch (error) {
             console.log(error)

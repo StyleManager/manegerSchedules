@@ -3,7 +3,7 @@ import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import fastify from "fastify";
 import { validatorCompiler, serializerCompiler, jsonSchemaTransform, ZodTypeProvider } from "fastify-type-provider-zod";
-import { PostDays } from "./functions/postDays";
+import { PostDays } from "./functions/days/postDays";
 import {PostUser } from "./routes/user/Create-user";
 import { GetUser } from "./routes/user/Login-user";
 import { PostSchedules } from "./routes/schedules/postSchedules";
