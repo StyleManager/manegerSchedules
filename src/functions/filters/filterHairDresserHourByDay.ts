@@ -55,12 +55,11 @@ export async function filterHairDresserHourByDay({day, cabeleleiroId}: {
         },
     })
     if(!hairDresserSchedules){throw new Error("Horario não encontrado")}
-    
     return hairDresserSchedules.Dias_has_Horarios
         .sort((a, b) => {
         const horarioA = a.horario.horario;
         const horarioB = b.horario.horario;
-        return horarioB.localeCompare(horarioA); // ordem decrescente
+        return horarioB.localeCompare(horarioA);
     })
     .map(horario => ({
         id: horario.id,

@@ -52,8 +52,9 @@ export async function filterHairDresserDayByHour({horario, cabeleleiroId}: {
             day: "asc"
         }
     })
-    if(!hairDresserSchedules){throw new Error("Horario não encontrado")}
-    
+    if (!hairDresserSchedules.length) { throw new Error("Horario não encontrado") }
+
+
     return hairDresserSchedules.flatMap(dia => {
         return dia.Dias_has_Horarios.map(horario => ({
             id: dia.id,
