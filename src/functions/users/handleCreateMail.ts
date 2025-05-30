@@ -1,6 +1,4 @@
 import { getMailCLient } from "../../lib/mails";
-import { prisma } from "../../lib/prisma";
-import { filterDay } from "../filters/filterDay";
 import { filterHourDay } from "../filters/filterDayHour";
 import { filterHourFree } from "../filters/filterHourFree";
 

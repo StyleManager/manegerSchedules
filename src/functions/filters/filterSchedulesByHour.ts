@@ -30,7 +30,7 @@ export async function filterSchedulesByHour({hour}: {
         },
     })
 
-    if (!dias) { throw new Error("Horario não disponivel para agendamento!")} 
+    if (dias.length <= 0) { throw new Error("Horario não disponivel para agendamento!")} 
 
     const data = dias.flatMap((d) => {
         if (!verifyDay(String(d.day))) return [];
@@ -59,7 +59,5 @@ export async function filterSchedulesByHour({hour}: {
             cabeleleiros: cabeleleirosUnicos
         }
     })
-
-    if(data.length <= 0) {throw new Error("Não há horarios disponiveis para este dia")}
     return data;
 }
