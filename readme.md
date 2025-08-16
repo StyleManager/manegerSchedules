@@ -1,14 +1,107 @@
- # API autodocodumentável
-  Requisitos:
-  1- Criar um sistema básico onde os clientes possam visualizar os horários disponíveis e marcar agendamentos. (ok)
-  - agendamentos para o dia, só podem acontecer com horarios 6h de antecedencia. (ok)
-  - banco de dados (Marcar agendamentos até 1 semena à frente) (ok)
-  - Após fazer o agendamento o cliente recebera por email, uma validação para confirmar (Só depois o agendamento é salvo no banco) (ok)
+# **StyleManager API** ✂️💈  
+**Sistema de Agendamentos para Barbearias e Salões**  
 
-  2- Os prestadores de serviço devem receber notificações automáticas sobre novos agendamentos.
-  - notificações por email da confirmação do agendamento. (ok)
-  - Agenda completa do dia (Agenda completa do dia). 
+API completa para gerenciamento de agendamentos no setor de beleza, desenvolvida com Node.js, Fastify e Prisma ORM.
 
-  3- Deve haver uma interface simples para gerenciar e cancelar compromissos.
-  - cancelar agendamento - capturar o email (criar um perfil), caso o email cancele 3 cancelamentos recebe um banimento de 1 semana
-  - interface que mostre todos os agendamentos de acordo com a data.
+---
+## ✨ **Funcionalidades Principais**
+- ✅ Agendamentos com regras de negócio:
+  - 6h de antecedência mínima para agendamentos no mesmo dia
+  - Limite de 1 semana para agendamentos futuros
+- ✅ Fluxo de confirmação por e-mail:
+  - Validação obrigatória antes de persistir no banco
+- ✅ Autenticação segura com JWT e Bcrypt
+- ✅ Documentação automática com Swagger UI
+
+---
+
+## 🛠️ **Stack Tecnológica**
+| Categoria       | Tecnologias                                                                 |
+|----------------|---------------------------------------------------------------------------|
+| **Backend**    | Fastify, TypeScript                                                       |
+| **Banco de Dados** | SQLite + Prisma ORM                                                      |
+| **Autenticação** | JWT, Bcrypt                                                              |
+| **Datas**      | Day.js, Date-Holidays                                                     |
+| **E-mails**    | Nodemailer                                                               |
+| **Testes**     | Vitest                                                                   |
+| **Ferramentas** | TSX, Tsup, Zod                                                          |
+
+---
+
+## ⚙️ **Configuração do Ambiente**
+
+### 📋 Pré-requisitos
+- Node.js 18+
+- SQLite (vem com o Prisma)
+- Yarn ou npm
+
+### 🚀 Executando o projeto
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/StyleManager/schedulemaneger.git
+   cd schedulemaneger
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   # ou
+   yarn install
+   ```
+
+3. **Configure o ambiente**
+   Crie seu arquivo `.env` baseado no `.env.example`:
+   ```env
+   DATABASE_URL="file:./dev.db"
+   JWT_SECRET="sua_chave_secreta_aqui"
+   ```
+
+4. **Execute as migrações do Prisma**
+   ```bash
+   npx prisma migrate dev --name init
+   ```
+
+5. **Popule o banco (opcional)**
+   ```bash
+   npm run seed
+   ```
+
+6. **Inicie o servidor**
+   ```bash
+   npm run dev
+   ```
+
+7. **Acesse a documentação**
+   ```
+   http://localhost:3333/docs
+   ```
+
+---
+
+## 🧪 **Testes**
+Execute a suíte de testes com:
+```bash
+npm test
+```
+
+---
+
+## 📌 **Próximos Passos**
+- [ ] Implementar microserviços
+- [ ] Adicionar integração com WhatsApp
+- [ ] Criar dashboard administrativo
+
+---
+
+## 🤝 **Como Contribuir**
+1. Faça um fork do projeto
+2. Crie sua branch (`git checkout -b feature/nova-funcionalidade`)
+3. Envie um Pull Request
+
+---
+
+**Desenvolvido por [José Xavier](https://github.com/devZevitor)**  
+---
+
+### 💬 **Contato**
+Encontrou um problema? Abra uma issue ou me chame no [https://www.linkedin.com/in/zevitor](#)!
