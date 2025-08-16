@@ -1,15 +1,19 @@
+@baseUrl = http://localhost:3333
+
+###
 # Create User
-POST http://localhost:3333/cadastrar
+POST {{baseUrl}}/cadastrar
 Content-Type: application/json
 
 {
     "name": "joseph",
-    "email": "joseph@gamil.com",
+    "email": "opa@gamil.com",
     "senha": "zezinho"
 }
 
 ###
-POST http://localhost:3333/login
+# @name login
+POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
@@ -17,40 +21,43 @@ Content-Type: application/json
     "senha": "zezinho"
 }
 
+###
+@token = {{login.response.body.acessToken}}
+
 #List Schedules
 ###
-GET http://localhost:3333/schedules/free
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgzNTY0MzksImV4cCI6MTc0ODM2MzYzOX0.EWRNuC0oiTRq_RZhtEbVpnuy60jenu6WUT9QhAxeeFg
+GET {{baseUrl}}/schedules/free
+Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:3333/schedules/free/day/12:00
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgzNTY0MzksImV4cCI6MTc0ODM2MzYzOX0.EWRNuC0oiTRq_RZhtEbVpnuy60jenu6WUT9QhAxeeFg
+GET {{baseUrl}}/schedules/free/day/12:00
+Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:3333/schedules/free/hour/2025-05-28
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgzNTY0MzksImV4cCI6MTc0ODM2MzYzOX0.EWRNuC0oiTRq_RZhtEbVpnuy60jenu6WUT9QhAxeeFg
+GET {{baseUrl}}/schedules/free/hour/2025-08-20
+Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:3333/schedules/hairDresser/hour/2025-05-27/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgzNTY0MzksImV4cCI6MTc0ODM2MzYzOX0.EWRNuC0oiTRq_RZhtEbVpnuy60jenu6WUT9QhAxeeFg
+GET {{baseUrl}}/schedules/hairDresser/hour/2025-05-27/1
+Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:3333/schedules/hairDresser/day/12:00/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgzNTY0MzksImV4cCI6MTc0ODM2MzYzOX0.EWRNuC0oiTRq_RZhtEbVpnuy60jenu6WUT9QhAxeeFg
+GET {{baseUrl}}/schedules/hairDresser/day/12:00/2
+Authorization: Bearer {{token}}
 
 #List Services
 ###
-GET http://localhost:3333/schedules/type
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgzNTY0MzksImV4cCI6MTc0ODM2MzYzOX0.EWRNuC0oiTRq_RZhtEbVpnuy60jenu6WUT9QhAxeeFg
+GET {{baseUrl}}/schedules/type
+Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:3333/schedules/hairDresser
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgzNTY0MzksImV4cCI6MTc0ODM2MzYzOX0.EWRNuC0oiTRq_RZhtEbVpnuy60jenu6WUT9QhAxeeFg
+GET {{baseUrl}}/schedules/hairDresser
+Authorization: Bearer {{token}}
 
 #Create Schedule
 ###
-POST http://localhost:3333/schedule
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YWZiYjQxNi03NWVmLTQwNWMtOWNmMi04YzJlZTMwOWM2MDUiLCJpYXQiOjE3NDgzNTY0MzksImV4cCI6MTc0ODM2MzYzOX0.EWRNuC0oiTRq_RZhtEbVpnuy60jenu6WUT9QhAxeeFg
+POST {{baseUrl}}/schedule
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {

@@ -6,6 +6,8 @@
   "scripts": {
     "seed": "tsx ./prisma/seed.ts",
     "dev": "tsx watch --env-file=.env src/server.ts",
+    "build" : "tsup src",
+    "start": "node dist/server.js",
     "test": "vitest"
   },
   "keywords": [],
@@ -35,6 +37,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.10.6",
     "@types/nodemailer": "^6.4.17",
+    "tsup": "^8.5.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "vitest": "^3.1.4"

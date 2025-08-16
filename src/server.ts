@@ -61,6 +61,6 @@ server.register(ConfirmationLink);
 server.register(GetHairDresserHour)
 server.register(GetHairDresserDay)
 
-server.listen({port: 3333}).then(() => {
+server.listen({port: 3333, host: '0.0.0.0'}).then(() => {
     console.log(`Server running in 3333`)
 })
