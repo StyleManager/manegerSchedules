@@ -1,11 +1,10 @@
 import { prisma } from "../../lib/prisma";
-import { Authenticate } from "../../middleware/authenticator";
 import { FastifyTypedInstance } from "../../types/fastifyTyped";
 import z from "zod";
 
 export function GetHairDresser(server: FastifyTypedInstance){
     server.get("/schedules/hairDresser", {
-        preHandler: Authenticate,
+        preHandler: [server.authenticate],
         schema: {
             description: "Listagem dos profissionais",
             response: {

@@ -1,11 +1,11 @@
 import { prisma } from "../../lib/prisma";
-import { Authenticate } from "../../middleware/authenticator";
+
 import { FastifyTypedInstance } from "../../types/fastifyTyped";
 import z from "zod";
 
 export function GetTypeSchedules(server: FastifyTypedInstance){
     server.get("/schedules/type", {
-        preHandler: Authenticate,
+        onRequest: [server.authenticate],
         schema: {
             description: "Listagem dos tipos de sevicos",
             response: {

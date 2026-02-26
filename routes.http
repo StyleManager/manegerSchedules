@@ -63,7 +63,7 @@ Content-Type: application/json
 {
     "destinary_name": "joseph",
     "destinary_email": "joseph@gamil.com",
-    "dayHorarioId": "8b0ab28a-e068-493e-967d-d3f5983e4794",
+    "dayHorarioId": "7ce688cd-3964-43c9-92d5-970134f6bf8d",
     "tipoServicoId": "1",
     "cabeleleiroId": "1"
 }

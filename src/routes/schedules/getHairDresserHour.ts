@@ -1,4 +1,3 @@
-import { Authenticate } from "../../middleware/authenticator";
 import { FastifyTypedInstance } from "../../types/fastifyTyped";
 import z from "zod";
 import { verifyDay } from "../../functions/days/verifyDay";
@@ -6,7 +5,7 @@ import { filterHairDresserHourByDay } from "../../functions/filters/filterHairDr
 
 export function GetHairDresserHour(server: FastifyTypedInstance){
     server.get("/schedules/hairDresser/hour/:day/:cabeleleiroId", {
-        preHandler: Authenticate,
+        onRequest: [server.authenticate],
         schema: {
             description: "Lista os profissionais pelo dia",
             params: z.object({

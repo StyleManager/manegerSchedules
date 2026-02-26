@@ -1,0 +1,49 @@
+{
+  "env": {
+    "node": true,            // Reconhece APIs do Node.js (process, __dirname, etc)
+    "es2022": true           // Permite features modernas JS (async/await, etc)
+  },
+
+  "extends": [
+    "eslint:recommended",                      // Regras básicas recomendadas
+    "plugin:@typescript-eslint/recommended"    // Regras específicas de TypeScript
+  ],
+
+  "parser": "@typescript-eslint/parser",       // Ensina ESLint a ler TypeScript
+
+  "parserOptions": {
+    "ecmaVersion": "latest",   // Usa JS mais moderno
+    "sourceType": "module"     // Permite import/export
+  },
+
+  "plugins": ["@typescript-eslint"],  // Plugin para TypeScript
+
+  "rules": {
+    // REGRA 1: Avisa quando usar 'any' (não bloqueia, só avisa)
+    "@typescript-eslint/no-explicit-any": "warn",
+    
+    // Exemplo:
+    // const x: any = 123  ← Vai mostrar aviso amarelo no VSCode
+    
+    // REGRA 2: Erro se declarar variável e não usar
+    "@typescript-eslint/no-unused-vars": ["error", { 
+      "argsIgnorePattern": "^_"  // Exceto se começar com _ (const _unused = 1)
+    }],
+    
+    // Exemplo:
+    // const nome = "João"  ← Se não usar 'nome', dá ERRO vermelho
+    // const _temp = 123    ← Se começar com _, pode não usar
+    
+    // REGRA 3: Pode usar console.log sem problemas
+    "no-console": "off",
+    
+    // REGRA 4: Use 'const' ao invés de 'let' quando possível
+    "prefer-const": "error"
+    
+    // Exemplo:
+    // let x = 1; x = 2  ← OK (valor muda)
+    // let y = 1         ← ERRO! Deveria ser const
+  },
+
+  "ignorePatterns": ["dist", "node_modules", "*.js"]  // Não checar esses arquivos
+}

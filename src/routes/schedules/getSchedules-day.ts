@@ -1,4 +1,4 @@
-import { Authenticate } from "../../middleware/authenticator";
+
 import { FastifyTypedInstance } from "../../types/fastifyTyped";
 import z from "zod";
 import { verifyDay } from "../../functions/days/verifyDay";
@@ -6,7 +6,7 @@ import { filterSchedulesByDay } from "../../functions/filters/filterSchedulesByD
 
 export function GetSchedulesHourByDay(server: FastifyTypedInstance){
     server.get("/schedules/free/hour/:day", {
-        preHandler: Authenticate,
+        onRequest: [server.authenticate],
         schema: {
             description: "Lista os horarios de atendimento do dia",
             params: z.object({

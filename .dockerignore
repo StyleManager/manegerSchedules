@@ -4,3 +4,4 @@ dist
 .git
 .dockerignore
 Dockerfile
+PROJETO-EXPLICADO.md

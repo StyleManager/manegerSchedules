@@ -6,7 +6,7 @@
   "scripts": {
     "seed": "tsx ./prisma/seed.ts",
     "dev": "tsx watch --env-file=.env src/server.ts",
-    "build" : "tsup src",
+    "build": "tsup src",
     "start": "node dist/server.js",
     "test": "vitest"
   },
@@ -28,7 +28,7 @@
     "fastify-plugin": "^5.0.1",
     "fastify-type-provider-zod": "^4.0.2",
     "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^6.9.16",
+    "nodemailer": "^8.0.1",
     "prisma": "^6.2.1",
     "zod": "^3.24.1"
   },

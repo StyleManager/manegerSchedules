@@ -1,11 +1,10 @@
-import { Authenticate } from "../../middleware/authenticator";
 import { FastifyTypedInstance } from "../../types/fastifyTyped";
 import z from "zod";
 import { filterSchedules } from "../../functions/filters/filterSchedules";
 
 export function GetSchedules(server: FastifyTypedInstance){
     server.get("/schedules/free", {
-        preHandler: Authenticate,
+        onRequest: [server.authenticate],
         schema: {
             description: "Lista todos os Horarios de atendimento",
             response: {

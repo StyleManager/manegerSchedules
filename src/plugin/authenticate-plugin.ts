@@ -4,7 +4,7 @@ import jwt from "@fastify/jwt";
 import cookie from "@fastify/cookie";
 import { env } from "../env";
 
-export default fp(async (server: FastifyInstance) => {
+export const authenticate = fp(async (server: FastifyInstance) => {
     server.register(cookie);
     server.register(jwt, {
         secret: env.SECRET_KEY,
@@ -15,7 +15,7 @@ export default fp(async (server: FastifyInstance) => {
        try {
             await request.jwtVerify();
        } catch (error) {
-            return reply.status(500).send({message: "Token Invalido!"})
+            return reply.status(401).send({message: "Usuário não autenticado!"})
        } 
     })
 })

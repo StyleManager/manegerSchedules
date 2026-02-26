@@ -3,7 +3,6 @@ import z from "zod";
 import nodemailer from "nodemailer";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import dayjs from "dayjs";
-import { Authenticate } from "../../middleware/authenticator";
 import { verifyDayHour } from "../../functions/days/verifyDayHour";
 import { handleCreateService } from "../../functions/users/handleCreateService";
 import { handleCreateMail } from "../../functions/users/handleCreateMail";
@@ -13,7 +12,7 @@ import { filterDay } from "../../functions/filters/filterDay";
 
 export function PostSchedules(server: FastifyTypedInstance){
     server.withTypeProvider<ZodTypeProvider>().post("/schedule",{
-        preHandler: Authenticate,
+        onRequest: [server.authenticate],
         schema: {
             description: "Envia um email de confirmação do agendamento",
             body: z.object({
