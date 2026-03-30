@@ -4,90 +4,90 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-}
+  url      = "file:./dev.db"
+}docker 
 
 model Clientes {
   id    String @id @default(uuid())
   name  String
   email String @unique
-  senha String 
+  senha String
 
   Agendamentos Agendamentos[]
 }
 
 model Agendamentos {
-  id              String @id @default(uuid())
-  clientId        String 
-  client          Clientes @relation(fields: [clientId], references: [id])
-  cabeleleiroId   String
-  cabeleleiro     Cabeleleiros @relation(fields: [cabeleleiroId], references: [id])
-  confirmado      Boolean @default(false)
-  diasHorariosId  String
-  diasHorarios    Dias_has_Horarios @relation(fields: [diasHorariosId], references: [id])
-  servicosId      String 
-  servicos        Servicos @relation(fields: [servicosId], references: [id])
+  id             String            @id @default(uuid())
+  clientId       String
+  client         Clientes          @relation(fields: [clientId], references: [id])
+  cabeleleiroId  String
+  cabeleleiro    Cabeleleiros      @relation(fields: [cabeleleiroId], references: [id])
+  confirmado     Boolean           @default(false)
+  diasHorariosId String
+  diasHorarios   Dias_has_Horarios @relation(fields: [diasHorariosId], references: [id])
+  servicosId     String
+  servicos       Servicos          @relation(fields: [servicosId], references: [id])
 }
 
 model Cabeleleiros {
-    id              String @id @default(uuid())
-    nome            String
-    description     String @default("Vazio")
+  id          String @id @default(uuid())
+  nome        String
+  description String @default("Vazio")
 
-    Agendamentos Agendamentos[]
-    Servicos Servicos[]
-    cabeleleiro_has_Disponibilidade cabeleleiro_has_Disponibilidade[]
+  Agendamentos                    Agendamentos[]
+  Servicos                        Servicos[]
+  cabeleleiro_has_Disponibilidade cabeleleiro_has_Disponibilidade[]
 }
 
 model cabeleleiro_has_Disponibilidade {
-    id  String @id @default(uuid())
-    cabeleleiroId   String
-    cabeleleiro     Cabeleleiros @relation(fields: [cabeleleiroId], references: [id])
-    diasHorariosId  String
-    diasHorarios    Dias_has_Horarios @relation(fields: [diasHorariosId], references: [id])
+  id             String            @id @default(uuid())
+  cabeleleiroId  String
+  cabeleleiro    Cabeleleiros      @relation(fields: [cabeleleiroId], references: [id])
+  diasHorariosId String
+  diasHorarios   Dias_has_Horarios @relation(fields: [diasHorariosId], references: [id])
 }
 
 model Servicos {
-  id              String @id @default(uuid())
-  tipoServicoId   String
-  tipoServico     TipoServico @relation(fields: [tipoServicoId], references: [id])
-  cabeleleiroId   String
-  cabeleleiro     Cabeleleiros @relation(fields: [cabeleleiroId], references: [id])
+  id            String       @id @default(uuid())
+  tipoServicoId String
+  tipoServico   TipoServico  @relation(fields: [tipoServicoId], references: [id])
+  cabeleleiroId String
+  cabeleleiro   Cabeleleiros @relation(fields: [cabeleleiroId], references: [id])
 
   Agendamentos Agendamentos[]
 }
 
 model TipoServico {
-   id     String @id @default(uuid())
-   nome   String
-   Preco  Float
+  id    String @id @default(uuid())
+  nome  String
+  Preco Float
 
-   Servicos Servicos[]
+  Servicos Servicos[]
 }
 
-
 model Dias_has_Horarios {
-   id      String @id @default(uuid())
-   dayId         String
-   day           Dias     @relation(fields: [dayId], references: [id])
-   horarioId     String
-   horario       Horarios @relation(fields: [horarioId], references: [id])
+  id        String   @id @default(uuid())
+  dayId     String
+  day       Dias     @relation(fields: [dayId], references: [id])
+  horarioId String
+  horario   Horarios @relation(fields: [horarioId], references: [id])
 
-   Agendamentos Agendamentos[]
+  Agendamentos Agendamentos[]
 
-   cabeleleiro_has_Disponibilidade cabeleleiro_has_Disponibilidade[]
+  cabeleleiro_has_Disponibilidade cabeleleiro_has_Disponibilidade[]
 }
 
 model Dias {
-  id      String @id @default(uuid())
-  day     DateTime @unique
+  id  String   @id @default(uuid())
+  day DateTime @unique
 
   Dias_has_Horarios Dias_has_Horarios[]
 }
 
 model Horarios {
-  id        String @id @default(uuid())
+  id      String  @id @default(uuid())
   livre   Boolean @default(true)
-  horario   String
+  horario String
 
   Dias_has_Horarios Dias_has_Horarios[]
 }

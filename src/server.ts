@@ -64,3 +64,7 @@ server.register(GetHairDresserDay)
 server.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
     console.log(`Server running in 3333`)
 })
+
+server.get("/health", () => {
+    return "OK!";
+})
