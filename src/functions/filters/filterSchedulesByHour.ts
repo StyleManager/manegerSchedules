@@ -1,8 +1,8 @@
-import dayjs from "dayjs";
-import {prisma} from "../../lib/prisma";
+import dayjs from "../../lib/dayjs";
+import { prisma } from "../../lib/prisma";
 import { verifyDay } from "../days/verifyDay";
 
-export async function filterSchedulesByHour({hour}: {
+export async function filterSchedulesByHour({ hour }: {
     hour: string,
 }) {
     const dias = await prisma.dias.findMany({
@@ -30,22 +30,22 @@ export async function filterSchedulesByHour({hour}: {
         },
     })
 
-    if (dias.length <= 0) { throw new Error("Horario não disponivel para agendamento!")} 
+    if (dias.length <= 0) { throw new Error("Horario não disponivel para agendamento!") }
 
     const data = dias.flatMap((d) => {
         if (!verifyDay(String(d.day))) return [];
         const dayFormatted = dayjs(d.day).format("DD/MM")
 
         const cabeleleiros = d.Dias_has_Horarios
-        .map(DH => {
-            return DH.cabeleleiro_has_Disponibilidade
-            .map(c => ({
-                cabeleleiroId: c.cabeleleiroId,
-                nome: c.cabeleleiro.nome,
-                description: c.cabeleleiro.description
-            }))
-        })
-        
+            .map(DH => {
+                return DH.cabeleleiro_has_Disponibilidade
+                    .map(c => ({
+                        cabeleleiroId: c.cabeleleiroId,
+                        nome: c.cabeleleiro.nome,
+                        description: c.cabeleleiro.description
+                    }))
+            })
+
         const cabeleleirosUnicos = Array.from(
             new Map(
                 cabeleleiros.flat().map(c => [c.cabeleleiroId, c])

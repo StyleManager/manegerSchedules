@@ -1,25 +1,27 @@
-import dayjs from "dayjs";
+import dayjs from "../../lib/dayjs";
 import Holidays from "date-holidays";
 
-export function verifySundayHoliday(newDate: Date){
-    const hd = new Holidays('BR')
+export function verifySundayHoliday(newDate: Date) {
+    try {
+        const hd = new Holidays('BR');
 
-    const currentDay = dayjs(newDate);
-    const sunday = currentDay.day() === 0
+        const sunday = dayjs(newDate).day() === 0;
 
-    if (hd.isHoliday(newDate)) {
-        const holiday = hd.getHolidays(newDate.getFullYear());
-        const holidayOnThisDate = holiday.find(h => dayjs(h.date).isSame(newDate, 'day'));
+        const holiday = hd.isHoliday(newDate);
 
-        if (!holidayOnThisDate) { throw new Error("Ocorreu algum erro ao identificar o feriado!")}
-        console.log(`Dia: ${newDate} é feriado: ${holidayOnThisDate.name}`);
-        return true;
+        if (holiday) {
+            console.log(`Dia: ${newDate} é feriado: ${holiday[0].name}`);
+            return true;
+        }
+
+        if (sunday) {
+            console.log(`Dia: ${newDate} é domingo`);
+            return true;
+        }
+
+        return false;
+    } catch (error) {
+        console.error("Erro ao identificar feriado/domingo:", error);
+        return false;
     }
-
-    if (sunday) {
-        console.log(`Dia: ${newDate} é domingo`); 
-        return true;
-    }
-
-    return false;
 }

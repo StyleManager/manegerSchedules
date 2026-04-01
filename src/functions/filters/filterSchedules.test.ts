@@ -1,28 +1,28 @@
-import {describe, vi, it, expect} from "vitest"
+import { describe, vi, it, expect } from "vitest"
 import { prisma } from "../../lib/prisma"
 import { filterSchedules } from "./filterSchedules"
-import dayjs from "dayjs"
+import dayjs from "../../lib/dayjs"
 import { verifyDayHour } from "../days/verifyDayHour"
 
-vi.mock("../../lib/prisma", ()=> ({
-    prisma: {
-        dias: {
-            findMany: vi.fn()
-        }
+vi.mock("../../lib/prisma", () => ({
+  prisma: {
+    dias: {
+      findMany: vi.fn()
     }
+  }
 }))
 
 vi.mock("../days/verifyDayHour", () => ({
-    verifyDayHour: vi.fn()
+  verifyDayHour: vi.fn()
 }))
 
 const schedulesFake = [
   {
     id: "idFake",
-    day: new Date(), 
+    day: new Date(),
     Dias_has_Horarios: [
       {
-        id: "diaHorarioIdFake", 
+        id: "diaHorarioIdFake",
         horario: {
           id: "idFake",
           horario: "horarioFake",
@@ -30,7 +30,7 @@ const schedulesFake = [
         },
         cabeleleiro_has_Disponibilidade: [
           {
-            cabeleleiroId: "cabeleleiroIdFake", 
+            cabeleleiroId: "cabeleleiroIdFake",
             cabeleleiro: {
               id: "cabeleleiroIdFake",
               nome: "nomeFake",
@@ -65,13 +65,13 @@ const schedulesFormattedFake = {
   ]
 }
 
-describe("filtro de agendamentos disponiveis", ()=> {
-    it("Deve retornar os horarios livres", async ()=> {
-        vi.mocked(prisma.dias.findMany).mockResolvedValue(schedulesFake as any)
-        vi.mocked(verifyDayHour).mockRejectedValue(true)
+describe("filtro de agendamentos disponiveis", () => {
+  it("Deve retornar os horarios livres", async () => {
+    vi.mocked(prisma.dias.findMany).mockResolvedValue(schedulesFake as any)
+    vi.mocked(verifyDayHour).mockRejectedValue(true)
 
-        const result = await filterSchedules()
-        expect(result).toEqual(expect.arrayContaining([expect.objectContaining(schedulesFormattedFake)]))
-        
-    })
+    const result = await filterSchedules()
+    expect(result).toEqual(expect.arrayContaining([expect.objectContaining(schedulesFormattedFake)]))
+
+  })
 })

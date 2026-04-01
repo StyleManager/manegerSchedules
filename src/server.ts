@@ -42,9 +42,14 @@ server.register(fastifySwaggerUi, {
 })
 
 server.addHook("onReady", async () => {
-    console.time("Carregando calendario");
-    await PostDays();
-    console.timeEnd("Carregando calendario");
+    try {
+        console.time("Carregando calendario");
+        await PostDays();
+        console.timeEnd("Carregando calendario");
+    } catch (err) {
+        console.error("Falha no startup:", err);
+        process.exit(1); 
+    }
 })
 
 server.register(authenticate)

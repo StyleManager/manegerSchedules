@@ -1,11 +1,11 @@
 import { prisma } from "../../lib/prisma";
-import dayjs from "dayjs"
+import dayjs from "../../lib/dayjs"
 import { verifyDayHour } from "../days/verifyDayHour";
 
-export async function filterHairDresserDayByHour({horario, cabeleleiroId}: {
+export async function filterHairDresserDayByHour({ horario, cabeleleiroId }: {
     horario: string,
     cabeleleiroId: string
-}){
+}) {
     const hairDresserSchedules = await prisma.dias.findMany({
         where: {
             Dias_has_Horarios: {
@@ -33,7 +33,7 @@ export async function filterHairDresserDayByHour({horario, cabeleleiroId}: {
                         some: {
                             cabeleleiroId,
                         }
-                    }                            
+                    }
                 },
                 include: {
                     horario: true,
@@ -70,6 +70,6 @@ export async function filterHairDresserDayByHour({horario, cabeleleiroId}: {
                 }))
             }
         }))
-        .filter(hFilter => verifyDayHour(dayjs(dia.day).format("DD/MM/YYY"), String(hFilter.horarios.horario.horario)))
+            .filter(hFilter => verifyDayHour(dayjs(dia.day).format("DD/MM/YYY"), String(hFilter.horarios.horario.horario)))
     });
 }

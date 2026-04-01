@@ -3,7 +3,6 @@
 ###
 GET {{baseUrl}}/health
 
-
 ###
 # Create User
 POST {{baseUrl}}/cadastrar
@@ -21,7 +20,7 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "joseph@gamil.com",
+    "email": "jose@gamil.com",
     "senha": "zezinho"
 }
 
@@ -38,11 +37,11 @@ GET {{baseUrl}}/schedules/free/day/12:00
 Authorization: Bearer {{token}}
 
 ###
-GET {{baseUrl}}/schedules/free/hour/2025-08-20
+GET {{baseUrl}}/schedules/free/hour/2026-04-01
 Authorization: Bearer {{token}}
 
 ###
-GET {{baseUrl}}/schedules/hairDresser/hour/2025-05-27/1
+GET {{baseUrl}}/schedules/hairDresser/hour/2026-04-01/1
 Authorization: Bearer {{token}}
 
 ###
@@ -66,8 +65,8 @@ Content-Type: application/json
 
 {
     "destinary_name": "joseph",
-    "destinary_email": "joseph@gamil.com",
-    "dayHorarioId": "7ce688cd-3964-43c9-92d5-970134f6bf8d",
+    "destinary_email": "opa@gamil.com",
+    "dayHorarioId": "bd4d19f7-71ae-44b9-aa9d-0fa93f06918a",
     "tipoServicoId": "1",
     "cabeleleiroId": "1"
 }
