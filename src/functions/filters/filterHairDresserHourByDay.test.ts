@@ -1,9 +1,9 @@
 import { prisma } from "../../lib/prisma";
-import {vi, describe, it, expect, beforeEach} from "vitest"
+import { vi, describe, it, expect, beforeEach } from "vitest"
 import { filterHairDresserHourByDay } from "../../functions/filters/filterHairDresserHourByDay";
-import dayjs from "dayjs";
+import dayjs from "../../lib/dayjs";
 
-vi.mock("../../lib/prisma", ()=> ({
+vi.mock("../../lib/prisma", () => ({
     prisma: {
         dias: {
             findFirst: vi.fn()
@@ -29,8 +29,8 @@ const schedulesFake = {
                 horario: "horarioFake"
             },
             cabeleleiro_has_Disponibilidade: [{
-                    cabeleleiroId: "cabeleleiroIdFake",
-                    cabeleleiro: {
+                cabeleleiroId: "cabeleleiroIdFake",
+                cabeleleiro: {
                     nome: "nomeFake",
                     description: "descriptionFake",
                 }
@@ -42,7 +42,7 @@ const schedulesFake = {
 const scheduleFormatedFake = {
     id: 'idFake',
     day: dayjs(new Date()).format("DD/MM"),
-    horarios: { 
+    horarios: {
         horario: {
             id: "idFake",
             horario: "horarioFake",
@@ -56,11 +56,11 @@ const scheduleFormatedFake = {
     }
 }
 
-describe("Filtro de dias dos cabeleleiro pelo horario escolhido", ()=> {
-    it("Deve ser possivel filtrar os cabeleleiros", async ()=> {
+describe("Filtro de dias dos cabeleleiro pelo horario escolhido", () => {
+    it("Deve ser possivel filtrar os cabeleleiros", async () => {
         vi.mocked(prisma.dias.findFirst).mockResolvedValue(schedulesFake)
         const result = await filterHairDresserHourByDay(dataExpected)
-      
+
         expect(result[0]).toEqual(expect.objectContaining(scheduleFormatedFake))
     })
 })

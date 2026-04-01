@@ -1,11 +1,11 @@
 import { prisma } from "../../lib/prisma";
-import dayjs from "dayjs"
+import dayjs from "../../lib/dayjs"
 import { verifyDayHour } from "../days/verifyDayHour";
 
-export async function filterHairDresserHourByDay({day, cabeleleiroId}: {
+export async function filterHairDresserHourByDay({ day, cabeleleiroId }: {
     day: string,
     cabeleleiroId: string
-}){
+}) {
     const start = dayjs(day).startOf("day").toDate()
     const end = dayjs(day).endOf("day").toDate()
 
@@ -38,7 +38,7 @@ export async function filterHairDresserHourByDay({day, cabeleleiroId}: {
                         some: {
                             cabeleleiroId,
                         }
-                    }                            
+                    }
                 },
                 include: {
                     horario: true,
@@ -54,27 +54,27 @@ export async function filterHairDresserHourByDay({day, cabeleleiroId}: {
             }
         },
     })
-    if(!hairDresserSchedules){throw new Error("Horario não encontrado")}
+    if (!hairDresserSchedules) { throw new Error("Horario não encontrado") }
     return hairDresserSchedules.Dias_has_Horarios
         .sort((a, b) => {
-        const horarioA = a.horario.horario;
-        const horarioB = b.horario.horario;
-        return horarioB.localeCompare(horarioA);
-    })
-    .map(horario => ({
-        id: horario.id,
-        day: dayjs(hairDresserSchedules.day).format("DD/MM"),
-        horarios: {
-            horario: {
+            const horarioA = a.horario.horario;
+            const horarioB = b.horario.horario;
+            return horarioB.localeCompare(horarioA);
+        })
+        .map(horario => ({
+            id: horario.id,
+            day: dayjs(hairDresserSchedules.day).format("DD/MM"),
+            horarios: {
+                horario: {
                     ...horario.horario
+                },
+                cabeleleiros: horario.cabeleleiro_has_Disponibilidade
+                    .map(c => ({
+                        cabeleleiroId: c.cabeleleiroId,
+                        nome: c.cabeleleiro.nome,
+                        description: c.cabeleleiro.description
+                    }))
             },
-            cabeleleiros: horario.cabeleleiro_has_Disponibilidade
-            .map(c => ({
-                cabeleleiroId: c.cabeleleiroId,
-                nome: c.cabeleleiro.nome,
-                description: c.cabeleleiro.description
-            }))
-        },
-    }))
-    .filter(scheduleItem => scheduleItem.horarios.horario.horario.length > 0)
+        }))
+        .filter(scheduleItem => scheduleItem.horarios.horario.horario.length > 0)
 };

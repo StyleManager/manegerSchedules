@@ -21,6 +21,9 @@ export function GetUser(server: FastifyTypedInstance){
                 401: z.object({
                     error: z.string(),
                 }).describe("Credenciais Invalidas"),
+                404: z.object({
+                    erro: z.string(),
+                }).describe("Usuario não encontrado!"),
                 500: z.object({
                     error: z.string(),
                 }).describe("Erro interno do servidor")
@@ -31,6 +34,12 @@ export function GetUser(server: FastifyTypedInstance){
 
             const authenticate = new AuthService(server.jwt)
             const {email, senha} = request.body;
+            const user = await prisma.clientes.findUnique({where: {
+                email: email
+            }})
+
+            if (!user) return reply.status(404).send({ erro: "Usuario não encontrado!" })
+
             const {acessToken, refreshToken} = await handleLogin({email, senha}, server.jwt)
 
             reply.setCookie("refreshToken", refreshToken, {
