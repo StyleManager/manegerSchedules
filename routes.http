@@ -20,12 +20,23 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "jose@gamil.com",
+    "email": "opa@gamil.com",
     "senha": "zezinho"
 }
 
 ###
 @token = {{login.response.body.acessToken}}
+
+
+###
+# @name Logout
+POST {{baseUrl}}/logout
+Authorization: Bearer {{token}}
+
+###
+# @name Auth
+GET {{baseUrl}}/auth
+Authorization: Bearer {{token}}
 
 #List Schedules
 ###

@@ -21,6 +21,9 @@ import { GetHairDresser } from "./routes/schedules/getHairDresser";
 import { GetHairDresserHour } from "./routes/schedules/getHairDresserHour";
 import { GetHairDresserDay } from "./routes/schedules/getHairDresserDay";
 import { GetSchedulesDayByHour } from "./routes/schedules/getSchedules-hour";
+import { Logout } from "./routes/user/logout";
+import { AuthRoute } from "./routes/user/auth";
+import { RefreshToken } from "./routes/user/refreshToken";
 
 const server = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -65,6 +68,9 @@ server.register(PostSchedules);
 server.register(ConfirmationLink);
 server.register(GetHairDresserHour)
 server.register(GetHairDresserDay)
+server.register(Logout)
+server.register(AuthRoute)
+server.register(RefreshToken)
 
 server.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
     console.log(`Server running in 3333`)

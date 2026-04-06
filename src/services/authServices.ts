@@ -11,7 +11,7 @@ export class AuthService {
 
         const senhaValidada = await bcrypt.compare(senha, user.senha);
         if(!senhaValidada) {throw new Error("Senha invalida!")}
-        const acessToken = this.jwt.sign({sub: user.id}, {expiresIn: "2h"})
+        const acessToken = this.jwt.sign({sub: user.id}, {expiresIn: "15m"})
         const refreshToken = this.jwt.sign({sub: user.id}, {expiresIn: "7d"})
         
         return {acessToken, refreshToken}
@@ -20,7 +20,7 @@ export class AuthService {
     refreshToken(token: string){
         const payload = this.jwt.verify(token) satisfies {sub: string}
         if(!payload) {throw new Error("Token invalido!")}
-        const acessToken = this.jwt.sign({sub: payload.sub}, {expiresIn: "15min"})
+        const acessToken = this.jwt.sign({sub: payload.sub}, {expiresIn: "15m"})
 
         return {acessToken}
     }

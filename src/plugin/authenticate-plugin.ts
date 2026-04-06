@@ -8,7 +8,7 @@ export const authenticate = fp(async (server: FastifyInstance) => {
     server.register(cookie);
     server.register(jwt, {
         secret: env.SECRET_KEY,
-        sign: { expiresIn: "2h"}
+        sign: { expiresIn: "15m"}
     })
 
     server.decorate("authenticate", async (request: FastifyRequest, reply: FastifyReply) => {

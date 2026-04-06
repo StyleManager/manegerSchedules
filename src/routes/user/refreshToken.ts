@@ -3,10 +3,9 @@ import { AuthService } from "../../services/authServices";
 
 export const RefreshToken: FastifyPluginAsyncZod = async (server) => {
     server.post("/refresh/token/v1", async (request, reply) => {
-        
        try {
             const authService = new AuthService(server.jwt);
-            const token = request.cookies.RefreshToken;
+            const token = request.cookies.refreshToken;
 
             if(!token) {return reply.status(401).send({message: "Token não encontrado!"})};
 

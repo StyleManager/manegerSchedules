@@ -31,8 +31,6 @@ export function GetUser(server: FastifyTypedInstance){
         }
     }, async (request, reply) => {
         try { 
-
-            const authenticate = new AuthService(server.jwt)
             const {email, senha} = request.body;
             const user = await prisma.clientes.findUnique({where: {
                 email: email
@@ -45,9 +43,9 @@ export function GetUser(server: FastifyTypedInstance){
             reply.setCookie("refreshToken", refreshToken, {
                 httpOnly: true,
                 secure: true,
-                sameSite: true,
+                sameSite: "lax",
                 path: "/",
-                maxAge: 60 * 60 * 24 * 7
+                maxAge: 60 * 15, 
             })
 
             return reply.status(201).send({acessToken})
@@ -57,34 +55,3 @@ export function GetUser(server: FastifyTypedInstance){
         }
     })
 }
-
-
-// import { type FastifyPluginAsyncZod } from "fastify-type-provider-zod";
-// import z from "zod";
-
-// export const LogoutUser: FastifyPluginAsyncZod = async (server) => {
-//     server.post("/user/logout", {
-//         schema: {
-//             tags: ["User", "Login"],
-//             summary: "Log-out cliente",
-//             description: "Apagar o cookie de acesso",
-//             response: {
-//                 200: z.object({
-//                     message: z.string()
-//                 })
-//             }
-//         }
-//     }, async (request, reply) => {
-
-//         reply.setCookie("userId", "", {
-//             httpOnly: true,
-//             sameSite: true,
-//             path: "/",
-//             maxAge: 0,
-//         })
-
-//         return reply.status(200).send({
-//             message: 'Logout feito com sucesso'
-//         })
-//     })
-// }
